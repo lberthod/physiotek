@@ -76,7 +76,9 @@ d'affilée ; la perdre compte une perte et casse la série.
   (`manifest.json`, `sw.js`).
 - **Sans caméra** : mode démo, la main du mannequin se pilote au stick tactile
   ou aux flèches. **Mise en page** : tout tient à l'écran à 100 % (pas de
-  défilement au-dessus de 1024 px), bouton plein écran (touche F).
+  défilement au-dessus de 1024 px), bouton plein écran (touche F) ; sur
+  téléphone, la scène prend tout l'écran pendant la séance et la caméra de jeu
+  cadre le corps entier en portrait (bulles et étoile restent dans l'image).
 - **Avatar** : mannequin neutre construit sur vos repères (doigts compris) ou
   squelette de bâtons ; la caméra de jeu recule d'elle-même en portrait.
 

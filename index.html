@@ -368,6 +368,38 @@
       #err code { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; word-break: break-all; color: #f0b3ad; }
       #boot.failed #bar { display: none; }
       #boot.failed #err { display: block; }
+      /* ---- Navigateur mobile (téléphone, tablette en portrait) ---- */
+      @media (max-width: 1023px) {
+        #top { padding: .45rem .8rem; }
+        .brand-mark { width: 2.4rem; height: 2.4rem; }
+        .brand .name { font-size: 1rem; }
+        /* Pendant la séance, la scène prend toute la hauteur visible : rien à
+           faire défiler pour voir le score, la consigne et les commandes. */
+        body.in-session #stage { height: calc(100dvh - 3.6rem); min-height: 0; }
+        body.in-session #app { padding-top: 0; }
+        /* Vignette caméra en haut à gauche sous le score (la consigne occupe le bas). */
+        #pip { left: .6rem; top: 5.4rem; bottom: auto; width: 104px; height: 78px; border-radius: 10px; }
+        .hud .topbar { padding: .7rem .8rem 3.4rem; }
+        .hud .score { font-size: 1.9rem; }
+        .hud .clock { padding: .35rem .7rem; }
+        .hud .clock b { font-size: 1.15rem; }
+        .ctl { top: 4.5rem; right: .6rem; gap: .4rem; }
+        .ctl button { padding: .45rem .8rem; font-size: .8rem; }
+        .hud .status { bottom: .6rem; padding: 0 .6rem; }
+        .hud .status .in { padding: .55rem .75rem; border-radius: .9rem; }
+        .hud .status p { font-size: .84rem; }
+        .hud .status .q { font-size: .7rem; }
+        .modal .in { max-width: 22rem; }
+        .modal h2 { font-size: 1.6rem; }
+        .welcome .in { padding-bottom: 5.6rem; }
+        .dock .in { gap: .4rem; }
+        .btn { height: 3rem; font-size: .95rem; }
+        .summary .in { padding: 1rem .9rem 1.4rem; }
+        #foot { font-size: .68rem; }
+      }
+      /* Écran tactile : pas de plein écran par élément sur iOS, le bouton est
+         inutile ; le stick tactile du moteur est déjà à portée de pouce. */
+      @media (pointer: coarse) { #fs { display: none !important; } }
       @media (prefers-reduced-motion: reduce) { .pressable, .bar > i { transition: none; } .countdown .n, .celebrate .pop, .spark, .hud .gain.pop, .center .ic { animation: none; } #boot, #fill { transition: none; } }
     </style>
   </head>
@@ -890,6 +922,12 @@
         // Pendant la séance, seul ce qui sert reste visible dans la barre latérale.
         $("side-garden").hidden = active();
         $("side-session").hidden = S.stage === "finished";
+        // Mobile : la scène remplit l'écran pendant la séance, et on la remonte en haut.
+        const inSession = active() && S.stage !== "setup" && S.stage !== "loading";
+        if (document.body.classList.contains("in-session") !== inSession) {
+          document.body.classList.toggle("in-session", inSession);
+          if (inSession && window.innerWidth < 1024) setTimeout(() => { stage.scrollIntoView({ block: "start", behavior: "smooth" }); fitCanvas(); }, 50);
+        }
         $("ss-locked").hidden = !active();
         $("amp").disabled = active();
         $("fs").hidden = !engineReady;
@@ -913,7 +951,7 @@
         $("choose-single").querySelector(".t2").textContent = `${GAMES[S.game].name} · une manche`;
         for (const b of $("levels").querySelectorAll("button")) { const on = Number(b.dataset.level) === S.level && !circuit; b.classList.toggle("is-selected", on); b.setAttribute("aria-pressed", String(on)); b.querySelector(".mark").className = `mark ${on ? "on" : ""}`; b.querySelector(".mark").textContent = on ? "✓" : "→"; }
         for (const b of $("worlds").querySelectorAll("button")) b.classList.toggle("on", Number(b.dataset.world) === S.world);
-        document.body.className = WORLDS[S.world].cls + (S.online ? "" : " offline");
+        document.body.className = WORLDS[S.world].cls + (S.online ? "" : " offline") + (document.body.classList.contains("in-session") ? " in-session" : "");
         $("world-desc").textContent = `${WORLDS[S.world].name} · ${WORLDS[S.world].description}`;
         for (const b of $("games").querySelectorAll("button")) b.classList.toggle("on", Number(b.dataset.game) === S.game);
         $("game-desc").textContent = S.game === 1 ? "Suivez l’étoile avec la main" : "Touchez les bulles à temps";
