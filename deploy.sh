@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Synchronise le site (index.html + pkg/) vers le VPS qui sert physiotech.ch et
+# Synchronise le site (index.html, pkg/, voice/, sw.js, manifest.json, favicon.svg) vers le VPS qui sert physiotech.ch et
 # mouveo.loicberthod.ch (même dossier, bloc Caddy déjà en place).
 set -euo pipefail
 cd "$(dirname "$0")"
