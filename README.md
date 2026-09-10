@@ -1,17 +1,32 @@
 # PhysioTech.ch — Attrape-bulles
 
-Jeu de rééducation motrice dans le navigateur : la caméra suit votre corps et
-vos mains (MediaPipe), un mannequin 3D vous imite, et des bulles apparaissent
-autour de vous — attrapez-les avant qu'elles n'éclatent, avec le geste que leur
-couleur impose. En ligne : **https://physiotech.ch/**
+> ## ⚠️ Démonstration technologique, pas un outil médical
+>
+> PhysioTech.ch est une **démo de vision par ordinateur** (suivi du corps et
+> des mains dans le navigateur, avatar 3D, jeu de capture). Elle n'a **aucune
+> valeur médicale, thérapeutique ni scientifique** : rien n'y est validé
+> cliniquement, aucune mesure n'est fiable au sens clinique, aucun avis
+> médical n'y est donné. Ce n'est ni un dispositif médical ni un programme de
+> rééducation. Consultez un professionnel de santé pour tout exercice de
+> rééducation ; arrêtez immédiatement en cas de douleur, vertige ou inconfort.
 
-Créé par [Antoine Quarroz](https://github.com/antoinequarroz) (Mouvéo, le
-prototype d'origine) et [Loïc Berthod](https://github.com/lberthod) (portage
-sur le moteur [RusteeGear](https://github.com/lberthod/rusteegear)).
+Jeu de capture dans le navigateur : la caméra suit votre corps et vos mains
+(MediaPipe), un mannequin 3D vous imite, et des bulles apparaissent autour de
+vous — attrapez-les avant qu'elles n'éclatent, avec le geste que leur couleur
+impose. En ligne : **https://physiotech.ch/**
 
-> Prototype de coaching, sans diagnostic ni mesure clinique — suivez les
-> consignes de votre professionnel de santé, arrêtez en cas de douleur, vertige
-> ou inconfort inhabituel.
+## Origine et auteurs
+
+- **[Mouvéo](https://github.com/antoinequarroz/mouveo-reeducation)** par
+  [Antoine Quarroz](https://github.com/antoinequarroz) : le prototype web
+  d'origine (React + MediaPipe Pose + canvas 2D), dont ce jeu reprend l'idée
+  — un patient face à sa caméra, des cibles lumineuses à atteindre, un score
+  motivant — et l'avertissement « prototype de coaching, sans diagnostic ni
+  mesure clinique ».
+- **[Loïc Berthod](https://github.com/lberthod)** : portage sur le moteur
+  [RusteeGear](https://github.com/lberthod/rusteegear) (Rust, WebAssembly,
+  WebGPU), mannequin 3D, suivi des doigts, mode attrape-bulles, code couleur
+  des gestes.
 
 ## Le jeu
 
